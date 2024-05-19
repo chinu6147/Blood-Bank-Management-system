@@ -1,0 +1,45 @@
+# BFS ALGORITHM
+
+import collections
+
+def bfs(graph, root):
+    
+    visited, queue = set(), collections.dequeue([root])
+    visited.add(root)
+    
+    while queue:
+        
+        vertex = queue.popleft()
+        print(str(vertex) + " ", end = " ")
+        
+        for neighbour in graph[vertex]:
+            if neighbour not in visited:
+                visited.add(neighbour)
+                queue.append(neighbour)
+                
+def create_graph():
+    graph = {}
+    num_edges = int(input("Enter the number of edges: "))
+    
+    for _ in range(num_edges):
+        src, dest = input("Enter edge (source destination): ").split()
+        if src not in graph:
+            graph[src] = []
+        if dest not in graph:
+            graph[dest] = []
+            
+        graph[src].append(dest)
+        graph[dest].append(src)
+        
+    return graph
+
+def get_start_node():
+    start_node = input("Enter the starting node: ")
+    return start_node
+
+if __name__== '__main__':
+    graph = create_graph()
+    start_node = get_start_node()
+    
+print("BFS TRAVERSAL: ")
+dfs(graph, start_node)
